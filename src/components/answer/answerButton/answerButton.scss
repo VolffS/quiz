@@ -1,0 +1,15 @@
+button.quiz__container__answer-btn {
+  min-height: 1.5rem;
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+  background-color: inherit;
+  text-align: start;
+  padding: .3rem;
+  border: #1f3e58 solid .2rem;
+  border-radius: .8rem;
+
+  &:hover {
+    filter: invert(20%);
+  }
+}

@@ -1,0 +1,61 @@
+
+div.modify__heading {
+  border-bottom: .12rem solid white;
+  padding: 0 1rem .4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap:.2rem;
+
+  button {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+div.modify__footer {
+  padding-top: .6rem;
+  display: flex;
+  justify-content: space-evenly;
+  border-top: .12rem solid white;
+}
+
+div.modify__main {
+  max-width: 38rem;
+  margin: 1rem 1rem .4rem;
+  display: grid;
+  grid-template-columns: minmax(14rem, 25rem) minmax(8rem, 25rem) ;
+  gap :2rem;
+
+  textarea.question-text{
+    min-height: 6rem;
+    max-height: 22rem;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  textarea.question-text, input{
+    font-size: inherit;
+    color: inherit;
+    font-family: inherit;
+    background-color: inherit;
+    text-align: start;
+    padding: .3rem;
+    border: #1f3e58 solid .2rem;
+    border-radius: .8rem;
+  }
+
+  div.answer-text {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    input {
+      min-height: 1.5rem;
+    }
+  }
+
+}

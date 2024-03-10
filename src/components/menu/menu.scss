@@ -1,0 +1,20 @@
+div.menu {
+  font-family: Roboto, sans-serif;
+  -webkit-box-shadow: 9px 6px 24px 5px rgba(0,0,0,0.63);
+  -moz-box-shadow: 9px 6px 24px 5px rgba(0,0,0,0.63);
+  box-shadow: 9px 6px 24px 5px rgba(0,0,0,0.63);
+  background-color: #212841;
+  padding: .6rem 0;
+  min-height: 15rem;
+  min-width: 25rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  max-height: 35rem;
+  & > button {
+    width: 60%;
+  }
+}
