@@ -18,8 +18,7 @@ export default function Question({numberQuestion, totalQuestions, question, call
                 <div className="quiz__container__question">
                     <p>{question.text}</p>
                 </div>
-                <Answer id={question.id}
-                        answers={shuffle(question.answers)}
+                <Answer answers={shuffle(question.answers)}
                         callback={callbackCheckAnswer}/>
             </div>
         </>

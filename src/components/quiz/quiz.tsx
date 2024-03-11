@@ -1,6 +1,6 @@
 import './quiz.scss';
 import {useState} from "react";
-import {QUESTIONS} from "../../assets/question.ts";
+import {UseQuestionsType} from "../../assets/question.ts";
 import Question from "../question/question.tsx";
 import {StatisticsPlayer} from "../statisticsPlayer/statisticsPlayer.tsx";
 
@@ -12,10 +12,9 @@ const statistics : Statistics = {
     trueAnswers: 0,
     numberQuestion: 0,
 }
-export default function Quiz({callback}: Readonly<{callback:()=> void }>) {
-    const quiz = QUESTIONS;
+export default function Quiz({callback, useQuiz}: Readonly<{callback:()=> void, useQuiz:UseQuestionsType }>) {
+    const quiz = useQuiz.questions;
     const [stateStatistics, setStateStatistics] = useState(statistics);
-
     function checkAnswer(answer : string) {
 
         if (answer === quiz[stateStatistics.numberQuestion].trueAnswer){
