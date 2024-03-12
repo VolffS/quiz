@@ -1,11 +1,14 @@
-button.btn-menu {
+.link-router {
   font-family: inherit;
   font-size: 1.2rem;
-  color: inherit;
+  text-align: center;
   padding: .4rem 1.5rem;
-  background-color: inherit;
+  height: 100%;
+  color: white;
+  text-decoration: none;
   border: #1f3e58 solid .2rem;
   border-radius: .6rem;
+  width: 12rem;
 
   &:hover {
     filter: invert(15%);

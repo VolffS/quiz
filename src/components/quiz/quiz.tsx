@@ -1,8 +1,8 @@
 import './quiz.scss';
 import {useState} from "react";
-import {UseQuestionsType} from "../../assets/question.ts";
 import Question from "../question/question.tsx";
 import {StatisticsPlayer} from "../statisticsPlayer/statisticsPlayer.tsx";
+import {QuestionType} from "../../type/question-type.ts";
 
 export type Statistics = {
     trueAnswers: number,
@@ -12,12 +12,11 @@ const statistics : Statistics = {
     trueAnswers: 0,
     numberQuestion: 0,
 }
-export default function Quiz({callback, useQuiz}: Readonly<{callback:()=> void, useQuiz:UseQuestionsType }>) {
-    const quiz = useQuiz.questions;
+export default function Quiz({questions}: Readonly<{questions: Array<QuestionType> }>) {
     const [stateStatistics, setStateStatistics] = useState(statistics);
     function checkAnswer(answer : string) {
 
-        if (answer === quiz[stateStatistics.numberQuestion].trueAnswer){
+        if (answer === questions[stateStatistics.numberQuestion].trueAnswer){
             setStateStatistics(prevState => ({
                 trueAnswers: prevState.trueAnswers+1,
                 numberQuestion: prevState.numberQuestion+1
@@ -31,12 +30,12 @@ export default function Quiz({callback, useQuiz}: Readonly<{callback:()=> void, 
     }
 
     return (<div className="quiz">
-            {stateStatistics.numberQuestion >= quiz.length
-                ? <StatisticsPlayer statistics={stateStatistics} callback={callback}/>
+            {stateStatistics.numberQuestion >= questions.length
+                ? <StatisticsPlayer statistics={stateStatistics}/>
                 : <Question numberQuestion={stateStatistics.numberQuestion}
-                        totalQuestions={quiz.length}
-                        question={quiz[stateStatistics.numberQuestion]}
-                        callbackCheckAnswer={checkAnswer}/>}
+                        totalQuestions={questions.length}
+                        question={questions[stateStatistics.numberQuestion]}
+                            checkingAnswer={checkAnswer}/>}
         </div>
     );
 }

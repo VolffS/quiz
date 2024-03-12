@@ -1,13 +1,13 @@
 import './question.scss';
-import {QuestionType} from "../../assets/question.ts";
-import Answer from "../answer/answer.tsx";
+import AnswerList from "../answer/answer-list.tsx";
 import {shuffle} from "../features/helpers.ts";
+import {QuestionType} from "../../type/question-type.ts";
 
-export default function Question({numberQuestion, totalQuestions, question, callbackCheckAnswer}: Readonly<{
+export default function Question({numberQuestion, totalQuestions, question, checkingAnswer}: Readonly<{
     numberQuestion: number,
     totalQuestions: number,
     question: QuestionType,
-    callbackCheckAnswer: (answer: string) => void
+    checkingAnswer: (answer: string) => void
 }>) {
 
     return (<>
@@ -18,8 +18,8 @@ export default function Question({numberQuestion, totalQuestions, question, call
                 <div className="quiz__container__question">
                     <p>{question.text}</p>
                 </div>
-                <Answer answers={shuffle(question.answers)}
-                        callback={callbackCheckAnswer}/>
+                <AnswerList answers={shuffle(question.answers)}
+                            checkingAnswer={checkingAnswer}/>
             </div>
         </>
     );

@@ -1,11 +1,11 @@
 import './App.scss'
 import Header from "./components/header/header.tsx";
-import Main from "./components/main/main.tsx";
+import {MainContent} from "./components/main/main-content.tsx";
+ export const App = () => {
 
- export default function App() {
     return (<>
         <Header />
-        <Main />
+        <MainContent />
     </>);
 }
 

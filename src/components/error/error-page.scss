@@ -1,12 +1,16 @@
-div.quiz {
-  font-family: Roboto, sans-serif;
+.error-page {
   background-color: #212841;
-  border-radius: 1rem;
-  padding: 1rem 0;
-  min-height: 13rem;
-  min-width: 26rem;
-  max-width: 38rem;
+  padding: 1rem;
+  border-radius: .6rem;
+  font-family: Roboto, sans-serif;
+  font-size: 1.2em;
   -webkit-box-shadow: 9px 6px 24px 5px rgba(0,0,0,0.63);
   -moz-box-shadow: 9px 6px 24px 5px rgba(0,0,0,0.63);
   box-shadow: 9px 6px 24px 5px rgba(0,0,0,0.63);
+  display: grid;
+  place-items: center;
+
+  h1 {
+    margin: .5rem;
+  }
 }

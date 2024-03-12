@@ -1,41 +1,33 @@
-import {Btn} from "../button/btn.tsx";
-import {UseQuestionsType} from "../../assets/question.ts";
 import './modify-quiz.scss';
-import {useState} from "react";
-import {BtnSubmit} from "../button/btn-submit.tsx";
-import {AddQuestion} from "./add-question.tsx";
-import {ChangeQuestion} from "./change-question.tsx";
+import {Btn} from "../button/btn.tsx";
+import { MouseEvent, useState} from "react";
+import {Form} from "./form.tsx";
+import {UseQuestionsType} from "../../type/use-questions-type.ts";
+import {QuestionType} from "../../type/question-type.ts";
+import {Action} from "../../assets/enum-action.ts";
+const emptyQuestion: QuestionType = {
+    id: "",
+    text: "",
+    trueAnswer: "",
+    answers: ["", "","", ""]
+};
 
-export default function ModifyQuiz({callback, useQuiz}: Readonly<{ callback: () => void, useQuiz: UseQuestionsType }>) {
+export default function ModifyQuiz({useQuiz}: Readonly<{ useQuiz: UseQuestionsType }>) {
     const [isAddQuestion, setIsAddQuestion] = useState(!useQuiz.questions.length);
-    const [thisIdQuestion, setThisIdQuestion] = useState(0);
-    let action = "";
+    const [thisIndexQuestion, setThisIndexQuestion] = useState(0);
 
-    function modifyQuiz(form: any) {
-        form.preventDefault();
-        const formData = new FormData(form.currentTarget)
-        const dataFrom = Object.fromEntries(formData);
-        const question :any = {
-            id: dataFrom.id,
-            text: dataFrom.text,
-            trueAnswer: dataFrom.answer0,
-            answers: [dataFrom.answer0, dataFrom.answer1, dataFrom.answer2, dataFrom.answer3]
-        };
+    function modifyQuiz(question:QuestionType, action: Action) {
         switch (action) {
-            case "delete": {
-                if (useQuiz.questions.length===1) {
-                    setIsAddQuestion(true);
-                }
-                useQuiz.removeQuestions(question.id);
+            case Action.Delete: {
+                deleteQuestion();
                 break;
             }
-            case "add": {
-                useQuiz.addQuestions(question);
-                setIsAddQuestion(false);
+            case Action.Add: {
+                addQuestion();
                 break;
             }
-            case "update": {
-                useQuiz.updateQuestions(question);
+            case Action.Update: {
+                updateQuestion();
                 break;
             }
             default : {
@@ -43,50 +35,49 @@ export default function ModifyQuiz({callback, useQuiz}: Readonly<{ callback: () 
             }
         }
 
+        function addQuestion() {
+            useQuiz.addQuestions(question);
+            setIsAddQuestion(false);
+        }
+        function deleteQuestion() {
+            if (useQuiz.questions.length === 1) {
+                setIsAddQuestion(true);
+            }
+            useQuiz.removeQuestions(question.id);
+        }
+        function updateQuestion() {
+            useQuiz.updateQuestions(question);
+        }
     }
-    function completionModify() {
-        callback();
-    }
-    function nextQuestion(ev: any) {
-        setThisIdQuestion(ev.currentTarget.textContent-1);
-        setIsAddQuestion(false);
-    }
-    function canselModify() {
+    function cancelModify():void {
         useQuiz.backUp();
-        callback();
     }
 
-    function typ() {
-        setIsAddQuestion(true);
 
-        setThisIdQuestion(0);
+    function changeIsAddQuestion() {
+        setIsAddQuestion(true);
+    }
+    function nextQuestion(event : MouseEvent<HTMLButtonElement> ) {
+        setThisIndexQuestion(+event.currentTarget.value - 1);
+        setIsAddQuestion(false);
     }
 
     return (
-        <form onSubmit={modifyQuiz}>
+        <div className="modify-questions">
             <div className="modify__heading">
-                {useQuiz.questions.length === 0
-                    ? ""
-                    : useQuiz.questions.map((value, index) => <Btn
-                    key={(Math.random() * 1e8).toString(16)+value.text}
-                    text={++index}
-                    callback={nextQuestion}/>)}
-                <button type="button" className="btn-menu" onClick={typ}>+</button>
+                {useQuiz.questions.length !== 0 &&
+                    useQuiz.questions.map((value, index) => <Btn
+                        key={(Math.random() * 1e8).toString(16) + value.text}
+                        text={++index}
+                        onBtnClick={nextQuestion}/>)}
+                <button type="button" className="btn-menu" onClick={changeIsAddQuestion}>+</button>
             </div>
-            {isAddQuestion
-                ? <AddQuestion />
-                : <ChangeQuestion question={useQuiz.questions[thisIdQuestion]}/>}
-
-            <div className="modify__footer">
-                <Btn text={"Завершить"} callback={completionModify}/>
-                <Btn text={"Отменить Всё"} callback={canselModify}/>
-                {isAddQuestion
-                    ? <BtnSubmit text={"Добавить"} callback={() => {action = "add"}}/>
-                    : <BtnSubmit text={"Изменить"} callback={() => {action = "update"}}/>}
-                {isAddQuestion ?"" : <BtnSubmit text="Удалить" callback={() => {action = "delete"}}/>}
-            </div>
-        </form>
-
-
+            <Form key={isAddQuestion ?"new" :useQuiz.questions[thisIndexQuestion].id}
+                  question={ isAddQuestion ? emptyQuestion : useQuiz.questions[thisIndexQuestion]}
+                  onSubmitForm={modifyQuiz}
+                  cancelModify={cancelModify}
+                  isAddQuestion={isAddQuestion}
+            />
+        </div>
     );
 }

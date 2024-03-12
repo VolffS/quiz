@@ -2,8 +2,8 @@ import {Statistics} from "../quiz/quiz.tsx";
 import './statisticsPlayer.scss'
 import {gifResult} from "../../assets/result-gif.ts";
 import {shuffle} from "../features/helpers.ts";
-export function StatisticsPlayer({statistics, callback}: Readonly<{ statistics: Statistics, callback:()=> void }>) {
-    console.log(gifResult)
+import {LinkRouter} from "../link-router/link-router.tsx";
+export function StatisticsPlayer({statistics}: Readonly<{ statistics: Statistics }>) {
     function getGifResult() {
         if (statistics.trueAnswers === statistics.numberQuestion ||
             statistics.trueAnswers === statistics.numberQuestion-1) {
@@ -15,8 +15,6 @@ export function StatisticsPlayer({statistics, callback}: Readonly<{ statistics: 
 
         return shuffle(gifResult.middleResult)[0]
     }
-    
-    const gif = getGifResult()
 
     return (
         <div className="quiz__statistics-player">
@@ -24,10 +22,10 @@ export function StatisticsPlayer({statistics, callback}: Readonly<{ statistics: 
                 Набранные очки: {statistics.trueAnswers}<span>/{statistics.numberQuestion}</span>
             </h1>
             <div className="container__img">
-                <img src={gif} alt=""/>
+                <img src={getGifResult()} alt=""/>
             </div>
 
-            <button onClick={callback}>Меню</button>
+            <LinkRouter text={"Меню"} linkText={"/"} />
         </div>
     );
 }

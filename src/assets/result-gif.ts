@@ -1,12 +1,5 @@
-
-type GifSType = Array<string>
-
-type ResultGifsType = {
-    goodResult:Array<string>;
-    middleResult:Array<string>;
-    badResult:Array<string>;
-}
-
+import {GifSType} from "../type/gif-s-type.ts";
+import {ResultGifsType} from "../type/result-gifs-type.ts";
 
 const goodGifs: GifSType = [
     "./actually.gif",

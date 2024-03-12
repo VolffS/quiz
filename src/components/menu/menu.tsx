@@ -1,26 +1,12 @@
 import './menu.scss'
-import {useState} from "react";
-import {Btn} from "../button/btn.tsx";
-import ModifyQuiz from "../modify-quiz/modify-quiz.tsx";
-import { UseQuestionsType} from "../../assets/question.ts";
+import {LinkRouter} from "../link-router/link-router.tsx";
 
-export function Menu({callback, useQuiz}: Readonly<{ callback: () => void, useQuiz: UseQuestionsType }>) {
-    const [stateChangeQuiz, setStateChangeQuiz] = useState(false);
-
-    function changeQuiz() {
-        setStateChangeQuiz(!stateChangeQuiz);
-    }
+export function Menu() {
 
     return (
         <div className="menu">
-            {stateChangeQuiz
-                ?<ModifyQuiz callback={changeQuiz} useQuiz={useQuiz}/>
-                :<>
-                    <Btn text={"Начать игру"} callback={callback}/>
-                    <Btn text={"Изменить тест"} callback={()=>{
-                        changeQuiz();
-                        useQuiz.updateBacUpQuestions(useQuiz.questions)}}/>
-                </>}
+            <LinkRouter text={"Начать игру"} linkText={"/game-quiz"} />
+            <LinkRouter text={"Изменить тест"} linkText={"/modify-quiz"} />
         </div>
     );
 }

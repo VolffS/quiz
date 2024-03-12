@@ -1,6 +1,6 @@
 import './button.scss'
-export function BtnSubmit({text, callback}: Readonly<{ text: string|number, callback: () => void }>) {
+export function BtnSubmit({text, onBtnClick}: Readonly<{ text: string|number, onBtnClick: () => void }>) {
     return (
-        <button type="submit" className="btn-menu" onClick={callback}>{text}</button>
+        <button type="submit" className="btn-menu" onClick={onBtnClick}>{text}</button>
     );
 }
