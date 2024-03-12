@@ -1,19 +1,25 @@
 import {GifSType} from "../type/gif-s-type.ts";
 import {ResultGifsType} from "../type/result-gifs-type.ts";
+import xqcXqcl from "./gif/xqc-xqcl.gif"
+import catNod from "./gif/cat-nod.gif"
+import nightcrawler from "./gif/nightcrawler-jake.gif"
+import jakeGyllenhaal from "./gif/jake-gyllenhaal.gif"
+import deadpDed from "./gif/deadp47-ded.gif"
+import actually from "./gif/actually.gif"
 
 const goodGifs: GifSType = [
-    "./actually.gif",
-    "./deadp47-ded.gif"
+    actually,
+    deadpDed
 ];
 
 const middleGifs: GifSType = [
-    "./cat-nod.gif",
-    "./nightcrawler-jake.gif"
+    catNod,
+    nightcrawler
 ];
 
 const badGifs: GifSType = [
-    "./jake-gyllenhaal.gif",
-    "./xqc-xqcl.gif"
+    jakeGyllenhaal,
+    xqcXqcl
 ];
 
 export const gifResult: ResultGifsType = {
