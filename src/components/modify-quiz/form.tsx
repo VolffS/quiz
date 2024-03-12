@@ -15,7 +15,6 @@ export const Form = ({question, isAddQuestion, onSubmitForm, cancelModify}: {que
     const onSubmit: SubmitHandler<QuestionType> = (data:QuestionType) => {
         data.trueAnswer = data.answers[0];
         onSubmitForm(data, action);
-        console.log(data)
     }
     let action: Action = Action.none;
 
