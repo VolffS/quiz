@@ -44,6 +44,7 @@ export default function ModifyQuiz({useQuiz}: Readonly<{ useQuiz: UseQuestionsTy
                 setIsAddQuestion(true);
             }
             useQuiz.removeQuestions(question.id);
+            setThisIndexQuestion(0);
         }
         function updateQuestion() {
             useQuiz.updateQuestions(question);
@@ -66,10 +67,12 @@ export default function ModifyQuiz({useQuiz}: Readonly<{ useQuiz: UseQuestionsTy
         <div className="modify-questions">
             <div className="modify__heading">
                 {useQuiz.questions.length !== 0 &&
-                    useQuiz.questions.map((value, index) => <Btn
-                        key={(Math.random() * 1e8).toString(16) + value.text}
-                        text={++index}
-                        onBtnClick={nextQuestion}/>)}
+                    useQuiz.questions.map((value, index) =>
+                        <Btn
+                            key={(Math.random() * 1e8).toString(16) + value.text}
+                            text={++index}
+                            onBtnClick={nextQuestion}
+                        />)}
                 <button type="button" className="btn-menu" onClick={changeIsAddQuestion}>+</button>
             </div>
             <Form key={isAddQuestion ?"new" :useQuiz.questions[thisIndexQuestion].id}
