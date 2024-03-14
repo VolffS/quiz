@@ -1,0 +1,23 @@
+
+div.quiz__heading {
+  border-bottom: .12rem solid white;
+
+  h3 {
+    padding: 0 1rem .4rem;
+    margin: 0;
+    span {
+      font-size: .6em;
+    }
+  }
+}
+div.quiz__container {
+  margin: 1rem 1rem .4rem;
+  display: grid;
+  grid-template-columns: minmax(14rem, 25rem) minmax(8rem, 25rem) ;
+  gap :1rem;
+
+  div.quiz__container__question {
+    text-wrap: normal;
+  }
+
+}
